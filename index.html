@@ -3,215 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Layanan - Whira Digital</title>
+    <title>Katalog Produk - Whira Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            --dark-bg: #0f172a;
-            --card-bg: #ffffff;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
+        :root { --primary: #1b4332; --secondary: #d97706; --bg: #f4f7f6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg); color: #334155; }
+
+        header { background: #fff; padding: 1.2rem 5%; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-weight: 700; font-size: 1.5rem; color: var(--primary); text-decoration: none; text-transform: uppercase; }
+        .logo span { color: var(--secondary); }
+
+        #beranda.hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.gudangresto.biz.id/uploads/gudangexresto20260213-083623-IMG20230901223916.webp');
+            background-size: cover; background-position: center; height: 300px; display: flex; align-items: center; justify-content: center; color: white; text-align: center;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            color: var(--text-dark);
-        }
+        .container { padding: 2rem 5%; max-width: 1400px; margin: 0 auto; }
+        #productGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
 
-        /* Hero Banner */
-        .banner {
-            background: var(--dark-bg) url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1470') no-repeat center center/cover;
-            background-blend-mode: overlay;
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
+        .product-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; display: flex; flex-direction: column; }
+        .media-box { position: relative; width: 100%; height: 200px; background: #000; overflow: hidden; }
+        .media-track { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; height: 100%; }
+        .slide img, .slide video { width: 100%; height: 100%; object-fit: cover; }
+        
+        .info-p { padding: 15px; text-align: center; }
+        .info-p h3 { font-size: 1rem; color: var(--primary); margin-bottom: 10px; font-weight: 700; }
+        
+        /* Tombol Detail Baru */
+        .btn-detail { background: var(--primary); color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem; display: block; border: none; cursor: pointer; width: 100%; transition: 0.3s; }
+        .btn-detail:hover { background: #2d6a4f; }
 
-        .banner h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
+        /* Modal / Pop-up Detail */
+        .modal { display: none; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: white; width: 100%; max-width: 500px; border-radius: 20px; padding: 25px; position: relative; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #94a3b8; }
+        .modal-header h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; padding-right: 20px; }
+        .price-tag { font-size: 1.5rem; color: var(--secondary); font-weight: 700; margin-bottom: 15px; display: block; }
+        .spec-box { background: #f8fafc; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; border-left: 4px solid var(--secondary); }
+        
+        .btn-wa-modal { background: #25d366; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
 
-        .banner p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* Container Box */
-        .container {
-            max-width: 1200px;
-            margin: -50px auto 50px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        /* Service Cards */
-        .card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 20px;
-            flex-grow: 1;
-        }
-
-        .card-category {
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: #2575fc;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .card-title {
-            font-size: 1.4rem;
-            margin: 0 0 10px 0;
-            color: var(--text-dark);
-        }
-
-        .card-desc {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .card-footer {
-            padding: 20px;
-            border-top: 1px solid #f1f5f9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #6a11cb;
-        }
-
-        .btn-order {
-            background: var(--primary-gradient);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-light);
-        }
-
-        @media (max-width: 768px) {
-            .banner h1 { font-size: 2rem; }
+        @media (max-width: 600px) {
+            #productGrid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+            .media-box { height: 160px !important; }
         }
     </style>
 </head>
 <body>
 
-    <header class="banner">
-        <h1>WHIRA DIGITAL</h1>
-        <p>Solusi Teknologi & Keamanan Terpercaya di Bekasi</p>
-    </header>
+<header>
+    <a href="#" class="logo">WHIRA<span> DIGITAL</span></a>
+</header>
 
-    <main class="container">
+<section id="beranda" class="hero">
+    <div>
+        <h1>KATALOG PRODUK</h1>
+        <p>Detail Spesifikasi & Harga Transparan</p>
+    </div>
+</section>
+
+<div class="container">
+    <div id="productGrid">Memuat data...</div>
+</div>
+
+<div id="detailModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-header">
+            <h2 id="modalTitle">Nama Produk</h2>
+        </div>
+        <span class="price-tag" id="modalPrice">Rp 0</span>
+        <div class="spec-box">
+            <strong>Spesifikasi:</strong><br>
+            <p id="modalDesc">Deskripsi detail produk akan muncul di sini.</p>
+        </div>
+        <a id="modalWA" href="#" class="btn-wa-modal">
+            <i class="fab fa-whatsapp"></i> Tanya / Beli Sekarang
+        </a>
+    </div>
+</div>
+
+<footer>
+    <div style="background: var(--primary); color: white; text-align: center; padding: 2.5rem 1rem; margin-top: 4rem; font-size: 0.8rem;">
+        <p style="font-weight: 600; text-transform: uppercase;">WHIRA DIGITAL</p>
+        <p>© 2026 whiradigital.com</p>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script>
+    const sheet_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ-kYQ3uQN_4OT-9JFvyj2dXYHz1FWoW8rV1c1fpf_Q4JNjgwtHVhia05oY9BKM67lQx4FJ8u52sZD/pub?output=csv';
+    const cloud_base = 'https://res.cloudinary.com/dmawwoupq/image/upload/';
+    let localData = [];
+
+    function init() {
+        Papa.parse(sheet_url, { download: true, header: true, complete: (results) => {
+            localData = results.data;
+            displayProducts(localData);
+        }});
+    }
+
+    function formatUrl(url) {
+        if (!url || url.trim() === "") return 'https://via.placeholder.com/400x300?text=No+Image';
+        if (url.startsWith('http')) return url;
+        return cloud_base + url;
+    }
+
+    function displayProducts(data) {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = data.map((p, index) => {
+            if(!p.NAMA) return '';
+            return `
+                <div class="product-card">
+                    <div class="media-box">
+                        <div class="media-track">
+                            <div class="slide"><img src="${formatUrl(p.FOTO1)}" loading="lazy"></div>
+                        </div>
+                    </div>
+                    <div class="info-p">
+                        <h3>${p.NAMA}</h3>
+                        <button class="btn-detail" onclick="showDetail(${index})">
+                            <i class="fas fa-eye"></i> Lihat Detail
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function showDetail(index) {
+        const item = localData[index];
+        document.getElementById('modalTitle').innerText = item.NAMA;
+        // Pastikan kolom HARGA tersedia di Sheet Anda
+        document.getElementById('modalPrice').innerText = item.HARGA ? 'Rp ' + item.HARGA : 'Hubungi Admin';
+        document.getElementById('modalDesc').innerText = item.DESKRIPSI || 'Tidak ada spesifikasi tambahan.';
         
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1550159930-40066082a4fc?auto=format&fit=crop&q=80&w=400" alt="Antena TV" class="card-img">
-            <div class="card-content">
-                <div class="card-category">Siaran TV</div>
-                <h3 class="card-title">Antena TV Digital</h3>
-                <p class="card-desc">Pemasangan antena UHF digital & Set Top Box untuk gambar jernih tanpa semut. Bonus setting channel lokal lengkap.</p>
-            </div>
-            <div class="card-footer">
-                <div class="price">Rp 350rb++</div>
-                <a href="#" class="btn-order">Pesan</a>
-            </div>
-        </div>
+        const waLink = `https://wa.me/6282211494040?text=Halo%20Whira%20Digital,%20saya%20tertarik%20dengan%20${encodeURIComponent(item.NAMA)}`;
+        document.getElementById('modalWA').href = waLink;
+        
+        document.getElementById('detailModal').style.display = 'flex';
+    }
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400" alt="Parabola" class="card-img">
-            <div class="card-content">
-                <div class="card-category">Siaran TV</div>
-                <h3 class="card-title">Pasang Parabola</h3>
-                <p class="card-desc">Siaran satelit bebas iuran bulanan. Tersedia Parabola Mini (Ku-Band) dan Jaring (C-Band) untuk ratusan channel.</p>
-            </div>
-            <div class="card-footer">
-                <div class="price">Rp 650rb++</div>
-                <a href="#" class="btn-order">Pesan</a>
-            </div>
-        </div>
+    function closeModal() {
+        document.getElementById('detailModal').style.display = 'none';
+    }
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=400" alt="CCTV" class="card-img">
-            <div class="card-content">
-                <div class="card-category">Keamanan</div>
-                <h3 class="card-title">Instalasi CCTV</h3>
-                <p class="card-desc">Paket CCTV 2MP/4MP dengan fitur monitoring via HP. Pantau rumah atau toko Anda dari mana saja secara real-time.</p>
-            </div>
-            <div class="card-footer">
-                <div class="price">Mulai 1.5jt</div>
-                <a href="#" class="btn-order">Pesan</a>
-            </div>
-        </div>
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('detailModal')) closeModal();
+    }
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400" alt="Website" class="card-img">
-            <div class="card-content">
-                <div class="card-category">Digital</div>
-                <h3 class="card-title">Pembuatan Website</h3>
-                <p class="card-desc">Jasa pembuatan Website Profile, Landing Page, atau Toko Online. Sudah termasuk Domain .com/.id dan Hosting.</p>
-            </div>
-            <div class="card-footer">
-                <div class="price">Mulai 1jt</div>
-                <a href="#" class="btn-order">Pesan</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=400" alt="Digital Marketing" class="card-img">
-            <div class="card-content">
-                <div class="card-category">Digital</div>
-                <h3 class="card-title">Digital Marketing</h3>
-                <p class="card-desc">Kelola konten TikTok/Instagram, video editing kreatif, dan optimasi iklan (Ads) untuk tingkatkan penjualan Anda.</p>
-            </div>
-            <div class="card-footer">
-                <div class="price">Konsultasi</div>
-                <a href="#" class="btn-order">Pesan</a>
-            </div>
-        </div>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Whira Digital - Bekasi. All Rights Reserved.</p>
-    </footer>
-
+    window.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
 </html>
