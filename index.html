@@ -11,29 +11,32 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--bg); color: #334155; }
 
-        /* Header */
-        header { background: #fff; padding: 1.5rem 5%; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        header { background: #fff; padding: 1.2rem 5%; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo { font-weight: 700; font-size: 1.5rem; color: var(--primary); text-decoration: none; text-transform: uppercase; }
         .logo span { color: var(--secondary); }
 
-        /* Judul Halaman Tanpa Banner Gambar */
-        .page-title { text-align: center; padding: 2rem 1rem 1rem; }
-        .page-title h1 { color: var(--primary); font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
-        .page-title p { color: #64748b; font-size: 0.9rem; margin-top: 5px; }
+        /* Banner Hero */
+        #beranda.hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover; background-position: center; height: 300px; display: flex; align-items: center; justify-content: center; color: white; text-align: center;
+        }
+        .hero h1 { font-size: 2.2rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+        .hero p { font-size: 1rem; opacity: 0.9; margin-top: 10px; }
 
-        .container { padding: 1rem 5% 3rem; max-width: 1400px; margin: 0 auto; }
+        .container { padding: 2rem 5%; max-width: 1400px; margin: 0 auto; }
+        
+        /* Grid Katalog */
         #productGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
 
         .product-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; display: flex; flex-direction: column; }
-        
-        /* Box Gambar Produk */
         .media-box { position: relative; width: 100%; height: 200px; background: #f1f5f9; overflow: hidden; }
-        .media-box img { width: 100%; height: 100%; object-fit: cover; }
+        .media-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-card:hover img { transform: scale(1.1); }
         
-        .info-p { padding: 15px; text-align: center; }
-        .info-p h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 12px; font-weight: 700; height: 2.5em; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .info-p { padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .info-p h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 15px; font-weight: 700; min-height: 2.5em; display: flex; align-items: center; justify-content: center; line-height: 1.3; }
         
-        .btn-detail { background: var(--primary); color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem; display: block; border: none; cursor: pointer; width: 100%; transition: 0.3s; }
+        .btn-detail { background: var(--primary); color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem; border: none; cursor: pointer; width: 100%; transition: 0.3s; }
         .btn-detail:hover { background: #2d6a4f; }
 
         /* Modal Detail */
@@ -42,16 +45,19 @@
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #94a3b8; }
-        .modal-header h2 { color: var(--primary); font-size: 1.3rem; margin-bottom: 10px; padding-right: 20px; }
-        .price-tag { font-size: 1.4rem; color: var(--secondary); font-weight: 700; margin-bottom: 15px; display: block; }
-        .spec-box { background: #f8fafc; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.85rem; line-height: 1.6; border-left: 4px solid var(--secondary); max-height: 200px; overflow-y: auto; }
+        .modal-header h2 { color: var(--primary); font-size: 1.3rem; margin-bottom: 10px; padding-right: 20px; text-align: left; }
+        .price-tag { font-size: 1.4rem; color: var(--secondary); font-weight: 700; margin-bottom: 15px; display: block; text-align: left; }
+        .spec-box { background: #f8fafc; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.85rem; line-height: 1.6; border-left: 4px solid var(--secondary); max-height: 250px; overflow-y: auto; text-align: left; white-space: pre-line; }
         
-        .btn-wa-modal { background: #25d366; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
+        .btn-wa-modal { background: #25d366; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; transition: 0.3s; }
+        .btn-wa-modal:hover { background: #1ebe57; }
 
         @media (max-width: 600px) {
+            .hero { height: 200px; }
+            .hero h1 { font-size: 1.5rem; }
             #productGrid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
             .media-box { height: 150px !important; }
-            .page-title h1 { font-size: 1.4rem; }
+            .modal-content { padding: 20px; }
         }
     </style>
 </head>
@@ -61,10 +67,12 @@
     <a href="#" class="logo">WHIRA<span> DIGITAL</span></a>
 </header>
 
-<div class="page-title">
-    <h1>KATALOG PRODUK</h1>
-    <p>Detail Spesifikasi & Harga Terkini</p>
-</div>
+<section id="beranda" class="hero">
+    <div>
+        <h1>KATALOG PRODUK</h1>
+        <p>Solusi Perangkat Digital Terpercaya</p>
+    </div>
+</section>
 
 <div class="container">
     <div id="productGrid">
@@ -80,33 +88,42 @@
         </div>
         <span class="price-tag" id="modalPrice">Rp 0</span>
         <div class="spec-box">
-            <strong>Keterangan / Spesifikasi:</strong><br>
-            <p id="modalDesc">Memuat informasi...</p>
+            <strong style="display:block; margin-bottom:5px; color:#1b4332;">Spesifikasi & Keterangan:</strong>
+            <div id="modalDesc">Memuat informasi...</div>
         </div>
-        <a id="modalWA" href="#" class="btn-wa-modal">
-            <i class="fab fa-whatsapp"></i> Chat Admin Sekarang
+        <a id="modalWA" href="#" class="btn-wa-modal" target="_blank">
+            <i class="fab fa-whatsapp"></i> Tanya Admin / Beli
         </a>
     </div>
 </div>
 
 <footer>
-    <div style="background: var(--primary); color: white; text-align: center; padding: 2rem 1rem; margin-top: 2rem; font-size: 0.75rem;">
-        <p style="font-weight: 600; text-transform: uppercase; margin-bottom: 5px;">WHIRA DIGITAL</p>
+    <div style="background: var(--primary); color: white; text-align: center; padding: 2rem 1rem; margin-top: 4rem; font-size: 0.8rem;">
+        <p style="font-weight: 600; text-transform: uppercase;">WHIRA DIGITAL</p>
         <p>© 2026 whiradigital.com</p>
     </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script>
-    const sheet_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ-kYQ3uQN_4OT-9JFvyj2dXYHz1FWoW8rV1c1fpf_Q4JNjgwtHVhia05oY9BKM67lQx4FJ8u52sZD/pub?output=csv';
+    // Link CSV dari Google Spreadsheet Anda
+    const sheet_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQV0MmEKZYKPOUjCzwA56dHsxUMXxoq35W3IbynQB7IntJB_D3rypSVVFTQJFFjJEVSV_ePUk3aWyCu/pub?output=csv';
     const cloud_base = 'https://res.cloudinary.com/dmawwoupq/image/upload/';
     let localData = [];
 
     function init() {
-        Papa.parse(sheet_url, { download: true, header: true, complete: (results) => {
-            localData = results.data;
-            displayProducts(localData);
-        }});
+        Papa.parse(sheet_url, { 
+            download: true, 
+            header: true, 
+            complete: (results) => {
+                // Filter baris kosong
+                localData = results.data.filter(row => row.NAMA && row.NAMA.trim() !== "");
+                displayProducts(localData);
+            },
+            error: (err) => {
+                document.getElementById('productGrid').innerHTML = '<div style="text-align: center; grid-column: 1/-1;">Gagal memuat data. Pastikan Spreadsheet sudah di-publish ke web sebagai CSV.</div>';
+            }
+        });
     }
 
     function formatUrl(url) {
@@ -117,8 +134,13 @@
 
     function displayProducts(data) {
         const grid = document.getElementById('productGrid');
+        
+        if (data.length === 0) {
+            grid.innerHTML = '<div style="text-align: center; grid-column: 1/-1; padding: 50px;">Belum ada produk yang ditampilkan.</div>';
+            return;
+        }
+
         grid.innerHTML = data.map((p, index) => {
-            if(!p.NAMA) return '';
             return `
                 <div class="product-card">
                     <div class="media-box">
@@ -127,7 +149,7 @@
                     <div class="info-p">
                         <h3>${p.NAMA}</h3>
                         <button class="btn-detail" onclick="showDetail(${index})">
-                            <i class="fas fa-search-plus"></i> Detail
+                            <i class="fas fa-search-plus"></i> Lihat Detail
                         </button>
                     </div>
                 </div>
@@ -138,10 +160,16 @@
     function showDetail(index) {
         const item = localData[index];
         document.getElementById('modalTitle').innerText = item.NAMA;
-        document.getElementById('modalPrice').innerText = item.HARGA ? 'Rp ' + item.HARGA : 'Hubungi Admin';
-        document.getElementById('modalDesc').innerText = item.DESKRIPSI || 'Unit tersedia, silakan hubungi admin untuk spesifikasi lengkap.';
         
-        const waLink = `https://wa.me/6282211494040?text=Halo%20Whira%20Digital,%20saya%20ingin%20bertanya%20tentang%20produk:%20${encodeURIComponent(item.NAMA)}`;
+        // Menampilkan Harga (jika kosong, tampilkan teks hubungi admin)
+        const hargaText = item.HARGA ? (isNaN(item.HARGA) ? item.HARGA : 'Rp ' + parseInt(item.HARGA).toLocaleString('id-ID')) : 'Hubungi Admin';
+        document.getElementById('modalPrice').innerText = hargaText;
+        
+        // Menampilkan Deskripsi
+        document.getElementById('modalDesc').innerText = item.DESKRIPSI || 'Silakan hubungi admin untuk informasi spesifikasi produk ini.';
+        
+        // Link WhatsApp
+        const waLink = `https://wa.me/6282211494040?text=Halo%20Whira%20Digital,%20saya%20tertarik%20dengan%20produk:%20${encodeURIComponent(item.NAMA)}`;
         document.getElementById('modalWA').href = waLink;
         
         document.getElementById('detailModal').style.display = 'flex';
